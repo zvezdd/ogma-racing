@@ -48,8 +48,8 @@ const teamMembers = [
 ]
 
 const galleryImages = [
-  'https://placehold.co/900x700/0b1524/ffc828?text=Workshop+Night',
-  'https://placehold.co/900x540/0b1524/ffc828?text=CAD+Iteration',
+  '/images/cad-model-1.png',
+  '/images/cad-model-2.png',
   'https://placehold.co/900x780/0b1524/ffc828?text=Chassis+Assembly',
   'https://placehold.co/900x620/0b1524/ffc828?text=Pit+Preparation',
   'https://placehold.co/900x720/0b1524/ffc828?text=Team+Review',
@@ -153,7 +153,7 @@ app.innerHTML = `
         <h2 class="section-title reveal">Our Car — CAD to Track</h2>
         <div class="car-layout">
           <article class="car-feature reveal tilt-card" id="tiltCard">
-            <img src="https://placehold.co/1200x700/0b1524/ffc828?text=OGMA+CAD+MODEL" alt="Ogma CAD model render" />
+            <img src="/images/cad-model-1.png" alt="Ogma CAD model render" />
             <div class="car-feature-meta">
               <p>Primary Render</p>
               <h3>OGM-01 Prototype</h3>
