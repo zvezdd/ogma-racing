@@ -73,9 +73,7 @@ app.innerHTML = `
     <div class="container nav-inner">
       <a href="#hero" class="brand">
         <span class="brand-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none">
-            <path d="M13 2 6 13h5l-1 9 8-12h-5l0-8Z" stroke="currentColor" stroke-width="1.6" />
-          </svg>
+          <img src="/images/ogma-logo.png" alt="" />
         </span>
         <span>OGMA</span>
       </a>
@@ -300,9 +298,7 @@ app.innerHTML = `
       <div>
         <a href="#hero" class="brand footer-brand">
           <span class="brand-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none">
-              <path d="M13 2 6 13h5l-1 9 8-12h-5l0-8Z" stroke="currentColor" stroke-width="1.6" />
-            </svg>
+            <img src="/images/ogma-logo.png" alt="" />
           </span>
           <span>OGMA</span>
         </a>

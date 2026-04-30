@@ -170,14 +170,18 @@ body {
 }
 
 .brand-icon {
-  width: 28px;
-  height: 28px;
-  color: var(--primary);
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.brand-icon svg {
+.brand-icon img {
   width: 100%;
   height: 100%;
+  object-fit: contain;
+  display: block;
 }
 
 .nav-links {
