@@ -7,42 +7,42 @@ const teamMembers = [
     name: 'Arystanbek Adilzhan',
     role: 'Cap',
     bio: 'Coordinates subsystems and keeps design, build, and strategy in lockstep.',
-    image: 'https://placehold.co/640x760/0b1524/ffc828?text=Arystanbek',
+    image: 'https://placehold.co/640x760/120606/fafafa?text=Arystanbek',
     social: '#',
   },
   {
     name: 'Aimuratov Azamat',
     role: 'Aerodynamics',
     bio: 'Optimizes drag profile and airflow channels for higher straight-line speed.',
-    image: 'https://placehold.co/640x760/0b1524/ffc828?text=Azamat',
+    image: 'https://placehold.co/640x760/120606/fafafa?text=Azamat',
     social: '#',
   },
   {
     name: 'Tsoy Anastasiya',
     role: 'Manufacturing',
     bio: 'Turns CAD precision into real components with strict tolerances.',
-    image: 'https://placehold.co/640x760/0b1524/ffc828?text=Anastasiya',
+    image: 'https://placehold.co/640x760/120606/fafafa?text=Anastasiya',
     social: '#',
   },
   {
     name: 'Mukan Ibrahim',
     role: 'Powertrain',
     bio: 'Leads engine subsystem development and performance validation.',
-    image: 'https://placehold.co/640x760/0b1524/ffc828?text=Ibrahim',
+    image: 'https://placehold.co/640x760/120606/fafafa?text=Ibrahim',
     social: '#',
   },
   {
     name: 'Fazylov Damir',
     role: 'Data & Telemetry',
     bio: 'Builds race-day dashboards and extracts actionable setup insights.',
-    image: 'https://placehold.co/640x760/0b1524/ffc828?text=Damir',
+    image: 'https://placehold.co/640x760/120606/fafafa?text=Damir',
     social: '#',
   },
   {
     name: 'Abdilda Zhasmin',
     role: 'Brand & Outreach',
     bio: 'Drives storytelling, sponsorship communication, and media presence.',
-    image: 'https://placehold.co/640x760/0b1524/ffc828?text=Zhasmin',
+    image: 'https://placehold.co/640x760/120606/fafafa?text=Zhasmin',
     social: '#',
   },
 ]
@@ -50,10 +50,10 @@ const teamMembers = [
 const galleryImages = [
   '/images/cad-model-1.png',
   '/images/cad-model-2.png',
-  'https://placehold.co/900x780/0b1524/ffc828?text=Chassis+Assembly',
-  'https://placehold.co/900x620/0b1524/ffc828?text=Pit+Preparation',
-  'https://placehold.co/900x720/0b1524/ffc828?text=Team+Review',
-  'https://placehold.co/900x560/0b1524/ffc828?text=Race+Simulation',
+  'https://placehold.co/900x780/120606/dc2626?text=Chassis+Assembly',
+  'https://placehold.co/900x620/120606/dc2626?text=Pit+Preparation',
+  'https://placehold.co/900x720/120606/dc2626?text=Team+Review',
+  'https://placehold.co/900x560/120606/dc2626?text=Race+Simulation',
 ]
 
 const app = document.querySelector<HTMLDivElement>('#app')
@@ -96,7 +96,7 @@ app.innerHTML = `
       <div class="container hero-content">
         <span class="section-badge reveal">
           <span class="badge-dot"></span>
-          STEM Racing Competition 2026
+          Kazakhstan Racing · STEM 2026
         </span>
         <h1 class="hero-title">
           <span class="hero-white">OG</span><span class="hero-yellow">MA</span>
@@ -283,10 +283,10 @@ app.innerHTML = `
       <div class="container">
         <span class="section-label reveal">OUR PARTNERS</span>
         <div class="sponsor-row">
-          <img class="reveal" src="https://placehold.co/220x90/0b1524/ffc828?text=Nova+Tech" alt="Nova Tech logo" />
-          <img class="reveal" src="https://placehold.co/220x90/0b1524/ffc828?text=Aero+Lab" alt="Aero Lab logo" />
-          <img class="reveal" src="https://placehold.co/220x90/0b1524/ffc828?text=Flux+Systems" alt="Flux Systems logo" />
-          <img class="reveal" src="https://placehold.co/220x90/0b1524/ffc828?text=STEM+Hub" alt="STEM Hub logo" />
+          <img class="reveal" src="https://placehold.co/220x90/120606/dc2626?text=Nova+Tech" alt="Nova Tech logo" />
+          <img class="reveal" src="https://placehold.co/220x90/120606/dc2626?text=Aero+Lab" alt="Aero Lab logo" />
+          <img class="reveal" src="https://placehold.co/220x90/120606/dc2626?text=Flux+Systems" alt="Flux Systems logo" />
+          <img class="reveal" src="https://placehold.co/220x90/120606/dc2626?text=STEM+Hub" alt="STEM Hub logo" />
         </div>
         <a href="#" class="btn btn-ghost reveal">Become a Sponsor</a>
       </div>
