@@ -1,7 +1,5 @@
 import './style.css'
 
-type PointerEventWithCurrentTarget = MouseEvent & { currentTarget: HTMLElement }
-
 const teamMembers = [
   {
     name: 'Arystanbek Adilzhan',
@@ -150,11 +148,22 @@ app.innerHTML = `
         <span class="section-label reveal">THE MACHINE</span>
         <h2 class="section-title reveal">Our Car — CAD to Track</h2>
         <div class="car-layout">
-          <article class="car-feature reveal tilt-card" id="tiltCard">
-            <img src="/images/cad-model-1.png" alt="Ogma CAD model render" />
+          <article class="car-viewer-card reveal">
+            <div class="car-viewer-body">
+              <div class="car-viewer-mount" id="carViewerMount" aria-label="Interactive 3D model of the car"></div>
+              <div class="car-viewer-chrome">
+                <p class="car-viewer-status" id="carViewerStatus">Loading 3D model…</p>
+                <div class="car-viewer-actions">
+                  <button type="button" class="car-viewer-btn is-active" id="carViewerAuto" aria-pressed="true">
+                    Auto spin
+                  </button>
+                  <button type="button" class="car-viewer-btn" id="carViewerReset">Reset view</button>
+                </div>
+              </div>
+            </div>
             <div class="car-feature-meta">
-              <p>Primary Render</p>
-              <h3>OGM-01 Prototype</h3>
+              <p>Interactive CAD</p>
+              <h3>OGM-01 · STL viewer</h3>
             </div>
           </article>
           <div class="car-details">
@@ -326,7 +335,10 @@ const navToggle = document.getElementById('navToggle')
 const navLinks = document.getElementById('navLinks')
 const revealItems = Array.from(document.querySelectorAll<HTMLElement>('.reveal'))
 const counterItems = Array.from(document.querySelectorAll<HTMLElement>('[data-count]'))
-const tiltCard = document.getElementById('tiltCard')
+const carViewerMount = document.getElementById('carViewerMount')
+const carViewerAuto = document.getElementById('carViewerAuto') as HTMLButtonElement | null
+const carViewerReset = document.getElementById('carViewerReset') as HTMLButtonElement | null
+const carViewerStatus = document.getElementById('carViewerStatus')
 const lightbox = document.getElementById('lightbox')
 const lightboxImage = document.getElementById('lightboxImage') as HTMLImageElement | null
 const lightboxCaption = document.getElementById('lightboxCaption')
@@ -402,16 +414,14 @@ if (navToggle && navLinks) {
   })
 }
 
-if (tiltCard) {
-  tiltCard.addEventListener('mousemove', (event) => {
-    const e = event as PointerEventWithCurrentTarget
-    const rect = e.currentTarget.getBoundingClientRect()
-    const x = (e.clientX - rect.left) / rect.width - 0.5
-    const y = (e.clientY - rect.top) / rect.height - 0.5
-    e.currentTarget.style.transform = `perspective(1200px) rotateY(${x * 8}deg) rotateX(${y * -8}deg)`
-  })
-  tiltCard.addEventListener('mouseleave', () => {
-    tiltCard.style.transform = ''
+if (carViewerMount) {
+  void import('./carViewer.ts').then(({ initCarViewer }) => {
+    initCarViewer({
+      mount: carViewerMount,
+      autoRotateButton: carViewerAuto,
+      resetButton: carViewerReset,
+      statusEl: carViewerStatus,
+    })
   })
 }
 

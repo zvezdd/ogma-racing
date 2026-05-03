@@ -464,6 +464,87 @@ body {
   animation: sway 8s ease-in-out infinite alternate;
 }
 
+.car-viewer-card {
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: rgb(18 10 10 / 56%);
+  backdrop-filter: blur(12px);
+  transition: all 200ms ease;
+}
+
+.car-viewer-body {
+  display: flex;
+  flex-direction: column;
+  min-height: min(52vh, 560px);
+}
+
+.car-viewer-mount {
+  position: relative;
+  flex: 1;
+  min-height: 360px;
+  background: radial-gradient(ellipse at 50% 0%, rgb(220 38 38 / 12%) 0%, transparent 55%),
+    linear-gradient(180deg, rgb(8 4 4 / 100%) 0%, rgb(5 3 3 / 100%) 100%);
+}
+
+.car-viewer-chrome {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 18px;
+  border-top: 1px solid var(--border);
+  background: rgb(8 5 5 / 72%);
+}
+
+.car-viewer-status {
+  margin: 0;
+  font-size: 0.82rem;
+  color: var(--text-dim);
+  flex: 1 1 200px;
+}
+
+.car-viewer-status.is-ready {
+  color: var(--text-muted);
+}
+
+.car-viewer-status.is-error {
+  color: var(--accent-soft);
+}
+
+.car-viewer-actions {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.car-viewer-btn {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--border-accent);
+  background: rgb(18 10 10 / 72%);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: border-color 200ms ease, color 200ms ease, background 200ms ease;
+}
+
+.car-viewer-btn:hover {
+  color: var(--text);
+  border-color: var(--primary);
+}
+
+.car-viewer-btn.is-active {
+  color: #fafafa;
+  border-color: var(--primary);
+  background: rgb(220 38 38 / 22%);
+}
+
 .car-feature img {
   width: 100%;
   display: block;
@@ -513,7 +594,8 @@ body {
 .team-card:hover,
 .social-card:hover,
 .stat-card:hover,
-.car-feature:hover {
+.car-feature:hover,
+.car-viewer-card:hover {
   transform: translateY(-5px);
   border-color: var(--border-accent);
   box-shadow: 0 8px 30px var(--primary-glow);
