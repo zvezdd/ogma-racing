@@ -82,6 +82,7 @@ app.innerHTML = `
         <a href="#about">About</a>
         <a href="#team">Team</a>
         <a href="#car">Car</a>
+        <a href="#pit-memory">Pit Memory</a>
         <a href="#gallery">Gallery</a>
         <a href="#socials">Socials</a>
         <a href="#socials" class="btn btn-primary btn-sm">Join Our Journey</a>
@@ -244,6 +245,17 @@ app.innerHTML = `
       </div>
     </section>
 
+    <section class="section section-striped" id="pit-memory">
+      <div class="container">
+        <span class="section-label reveal">PIT LANE TRAINING</span>
+        <h2 class="section-title reveal">Pit Stop Memory</h2>
+        <p class="memory-intro reveal">
+          Match pairs of tyres, tools, and engine parts — no timer, just calm focus like in the garage.
+        </p>
+        <div class="memory-mount reveal" id="pitMemoryMount"></div>
+      </div>
+    </section>
+
     <section class="section" id="gallery">
       <div class="container">
         <span class="section-label reveal">BEHIND THE BUILD</span>
@@ -317,6 +329,7 @@ app.innerHTML = `
         <a href="#about">About</a>
         <a href="#team">Team</a>
         <a href="#car">Car</a>
+        <a href="#pit-memory">Pit Memory</a>
         <a href="#gallery">Gallery</a>
       </div>
       <p class="footer-copy">Ogma Racing Team © 2026 · Built with passion</p>
@@ -339,6 +352,7 @@ const carViewerMount = document.getElementById('carViewerMount')
 const carViewerAuto = document.getElementById('carViewerAuto') as HTMLButtonElement | null
 const carViewerReset = document.getElementById('carViewerReset') as HTMLButtonElement | null
 const carViewerStatus = document.getElementById('carViewerStatus')
+const pitMemoryMount = document.getElementById('pitMemoryMount')
 const lightbox = document.getElementById('lightbox')
 const lightboxImage = document.getElementById('lightboxImage') as HTMLImageElement | null
 const lightboxCaption = document.getElementById('lightboxCaption')
@@ -422,6 +436,12 @@ if (carViewerMount) {
       resetButton: carViewerReset,
       statusEl: carViewerStatus,
     })
+  })
+}
+
+if (pitMemoryMount) {
+  void import('./pitStopMemory.ts').then(({ initPitStopMemory }) => {
+    initPitStopMemory({ mount: pitMemoryMount })
   })
 }
 
