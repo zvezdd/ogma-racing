@@ -83,6 +83,7 @@ app.innerHTML = `
         <a href="#team">Team</a>
         <a href="#car">Car</a>
         <a href="#pit-memory">Pit Memory</a>
+        <a href="#find-fault">Find Fault</a>
         <a href="#gallery">Gallery</a>
         <a href="#socials">Socials</a>
         <a href="#socials" class="btn btn-primary btn-sm">Join Our Journey</a>
@@ -256,7 +257,18 @@ app.innerHTML = `
       </div>
     </section>
 
-    <section class="section" id="gallery">
+    <section class="section" id="find-fault">
+      <div class="container">
+        <span class="section-label reveal">VISUAL INSPECTION</span>
+        <h2 class="section-title reveal">Find the Car Fault</h2>
+        <p class="fault-intro reveal">
+          Spot what is wrong on the car or in the garage — tap the problem. No timer, one level at a time.
+        </p>
+        <div class="fault-mount reveal" id="findFaultMount"></div>
+      </div>
+    </section>
+
+    <section class="section section-striped" id="gallery">
       <div class="container">
         <span class="section-label reveal">BEHIND THE BUILD</span>
         <h2 class="section-title reveal">Gallery</h2>
@@ -330,6 +342,7 @@ app.innerHTML = `
         <a href="#team">Team</a>
         <a href="#car">Car</a>
         <a href="#pit-memory">Pit Memory</a>
+        <a href="#find-fault">Find Fault</a>
         <a href="#gallery">Gallery</a>
       </div>
       <p class="footer-copy">Ogma Racing Team © 2026 · Built with passion</p>
@@ -353,6 +366,7 @@ const carViewerAuto = document.getElementById('carViewerAuto') as HTMLButtonElem
 const carViewerReset = document.getElementById('carViewerReset') as HTMLButtonElement | null
 const carViewerStatus = document.getElementById('carViewerStatus')
 const pitMemoryMount = document.getElementById('pitMemoryMount')
+const findFaultMount = document.getElementById('findFaultMount')
 const lightbox = document.getElementById('lightbox')
 const lightboxImage = document.getElementById('lightboxImage') as HTMLImageElement | null
 const lightboxCaption = document.getElementById('lightboxCaption')
@@ -442,6 +456,12 @@ if (carViewerMount) {
 if (pitMemoryMount) {
   void import('./pitStopMemory.ts').then(({ initPitStopMemory }) => {
     initPitStopMemory({ mount: pitMemoryMount })
+  })
+}
+
+if (findFaultMount) {
+  void import('./findFault.ts').then(({ initFindFault }) => {
+    initFindFault({ mount: findFaultMount })
   })
 }
 
