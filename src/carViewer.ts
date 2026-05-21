@@ -53,7 +53,7 @@ export function initCarViewer(options: CarViewerOptions): () => void {
   keyLight.position.set(6, 10, 7)
   scene.add(keyLight)
 
-  const rimLight = new THREE.DirectionalLight(0xf87171, 0.45)
+  const rimLight = new THREE.DirectionalLight(0xf34a9a, 0.45)
   rimLight.position.set(-5, 4, -6)
   scene.add(rimLight)
 

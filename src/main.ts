@@ -48,10 +48,10 @@ const teamMembers = [
 const galleryImages = [
   '/images/cad-model-1.png',
   '/images/cad-model-2.png',
-  'https://placehold.co/900x780/120606/dc2626?text=Chassis+Assembly',
-  'https://placehold.co/900x620/120606/dc2626?text=Pit+Preparation',
-  'https://placehold.co/900x720/120606/dc2626?text=Team+Review',
-  'https://placehold.co/900x560/120606/dc2626?text=Race+Simulation',
+  'https://placehold.co/900x780/120606/f34a9a?text=Chassis+Assembly',
+  'https://placehold.co/900x620/120606/f34a9a?text=Pit+Preparation',
+  'https://placehold.co/900x720/120606/f34a9a?text=Team+Review',
+  'https://placehold.co/900x560/120606/f34a9a?text=Race+Simulation',
 ]
 
 const app = document.querySelector<HTMLDivElement>('#app')
@@ -70,10 +70,7 @@ app.innerHTML = `
   <nav class="navbar" id="navbar">
     <div class="container nav-inner">
       <a href="#hero" class="brand">
-        <span class="brand-icon" aria-hidden="true">
-          <img src="/images/ogma-logo.png" alt="" />
-        </span>
-        <span>OGMA</span>
+        <img class="brand-logo" src="/images/ogma-logo.png" alt="OGMA" />
       </a>
       <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
         <span></span><span></span><span></span>
@@ -84,6 +81,7 @@ app.innerHTML = `
         <a href="#car">Car</a>
         <a href="#pit-memory">Pit Memory</a>
         <a href="#find-fault">Find Fault</a>
+        <a href="#pit-timer">Pit Timer</a>
         <a href="#gallery">Gallery</a>
         <a href="#socials">Socials</a>
         <a href="#socials" class="btn btn-primary btn-sm">Join Our Journey</a>
@@ -268,7 +266,18 @@ app.innerHTML = `
       </div>
     </section>
 
-    <section class="section section-striped" id="gallery">
+    <section class="section section-striped" id="pit-timer">
+      <div class="container">
+        <span class="section-label reveal">PIT STOP CLOCK</span>
+        <h2 class="section-title reveal">Session Timer</h2>
+        <p class="pit-timer-intro reveal">
+          Practice your reaction like race control — start when you are ready, reset for another run.
+        </p>
+        <div class="pit-timer-mount reveal" id="pitTimerMount"></div>
+      </div>
+    </section>
+
+    <section class="section" id="gallery">
       <div class="container">
         <span class="section-label reveal">BEHIND THE BUILD</span>
         <h2 class="section-title reveal">Gallery</h2>
@@ -316,10 +325,10 @@ app.innerHTML = `
       <div class="container">
         <span class="section-label reveal">OUR PARTNERS</span>
         <div class="sponsor-row">
-          <img class="reveal" src="https://placehold.co/220x90/120606/dc2626?text=Nova+Tech" alt="Nova Tech logo" />
-          <img class="reveal" src="https://placehold.co/220x90/120606/dc2626?text=Aero+Lab" alt="Aero Lab logo" />
-          <img class="reveal" src="https://placehold.co/220x90/120606/dc2626?text=Flux+Systems" alt="Flux Systems logo" />
-          <img class="reveal" src="https://placehold.co/220x90/120606/dc2626?text=STEM+Hub" alt="STEM Hub logo" />
+          <img class="reveal" src="https://placehold.co/220x90/120606/f34a9a?text=Nova+Tech" alt="Nova Tech logo" />
+          <img class="reveal" src="https://placehold.co/220x90/120606/f34a9a?text=Aero+Lab" alt="Aero Lab logo" />
+          <img class="reveal" src="https://placehold.co/220x90/120606/f34a9a?text=Flux+Systems" alt="Flux Systems logo" />
+          <img class="reveal" src="https://placehold.co/220x90/120606/f34a9a?text=STEM+Hub" alt="STEM Hub logo" />
         </div>
         <a href="#" class="btn btn-ghost reveal">Become a Sponsor</a>
       </div>
@@ -330,10 +339,7 @@ app.innerHTML = `
     <div class="container footer-inner">
       <div>
         <a href="#hero" class="brand footer-brand">
-          <span class="brand-icon" aria-hidden="true">
-            <img src="/images/ogma-logo.png" alt="" />
-          </span>
-          <span>OGMA</span>
+          <img class="brand-logo" src="/images/ogma-logo.png" alt="OGMA" />
         </a>
         <p>Technical precision meets creative ambition.</p>
       </div>
@@ -343,6 +349,7 @@ app.innerHTML = `
         <a href="#car">Car</a>
         <a href="#pit-memory">Pit Memory</a>
         <a href="#find-fault">Find Fault</a>
+        <a href="#pit-timer">Pit Timer</a>
         <a href="#gallery">Gallery</a>
       </div>
       <p class="footer-copy">Ogma Racing Team © 2026 · Built with passion</p>
@@ -367,6 +374,7 @@ const carViewerReset = document.getElementById('carViewerReset') as HTMLButtonEl
 const carViewerStatus = document.getElementById('carViewerStatus')
 const pitMemoryMount = document.getElementById('pitMemoryMount')
 const findFaultMount = document.getElementById('findFaultMount')
+const pitTimerMount = document.getElementById('pitTimerMount')
 const lightbox = document.getElementById('lightbox')
 const lightboxImage = document.getElementById('lightboxImage') as HTMLImageElement | null
 const lightboxCaption = document.getElementById('lightboxCaption')
@@ -462,6 +470,12 @@ if (pitMemoryMount) {
 if (findFaultMount) {
   void import('./findFault.ts').then(({ initFindFault }) => {
     initFindFault({ mount: findFaultMount })
+  })
+}
+
+if (pitTimerMount) {
+  void import('./pitTimer.ts').then(({ initPitTimer }) => {
+    initPitTimer({ mount: pitTimerMount })
   })
 }
 
