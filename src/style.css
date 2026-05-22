@@ -202,6 +202,43 @@ body {
   max-width: 200px;
 }
 
+.lang-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: rgb(12 6 10 / 72%);
+  margin-left: auto;
+  margin-right: 8px;
+}
+
+.lang-switch-btn {
+  border: none;
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-family: inherit;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  background: transparent;
+  cursor: pointer;
+  transition: color 200ms ease, background 200ms ease;
+}
+
+.lang-switch-btn.is-active {
+  color: #fff;
+  background: var(--primary);
+  box-shadow: 0 4px 14px rgb(243 74 154 / 32%);
+}
+
+.lang-switch-btn:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
 .nav-links {
   display: inline-flex;
   align-items: center;
@@ -777,8 +814,16 @@ body {
   gap: 16px;
 }
 
+a.social-card {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
 .social-card {
   padding: 20px;
+  position: relative;
+  overflow: hidden;
 }
 
 .social-card h3 {
@@ -823,17 +868,29 @@ body {
   margin: 0 0 26px;
 }
 
-.sponsor-row img {
-  width: 100%;
+.sponsor-pill {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 72px;
+  padding: 14px 12px;
   border-radius: 10px;
   border: 1px solid var(--border);
   background: rgb(18 10 10 / 64%);
-  filter: grayscale(1) saturate(0.4);
-  transition: filter 200ms ease;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(0.9rem, 2.2vw, 1.1rem);
+  line-height: 1.2;
+  letter-spacing: 0.05em;
+  text-align: center;
+  color: var(--accent-soft);
+  transition: border-color 200ms ease, background 200ms ease, color 200ms ease, transform 200ms ease;
 }
 
-.sponsor-row img:hover {
-  filter: grayscale(0) saturate(1);
+.sponsor-pill:hover {
+  border-color: var(--border-accent);
+  background: rgb(38 14 14 / 76%);
+  color: var(--text);
+  transform: translateY(-3px);
 }
 
 .footer {
@@ -935,6 +992,56 @@ body {
   background: none;
   color: var(--text);
   cursor: pointer;
+}
+
+/* Event announcement */
+.event-intro {
+  max-width: 640px;
+  margin: 0 0 28px;
+  color: var(--text-muted);
+  font-size: 1.05rem;
+}
+
+.event-poster {
+  max-width: min(560px, 100%);
+  margin: 0 auto 24px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--border-accent);
+  box-shadow: 0 12px 32px rgb(0 0 0 / 28%);
+  background: #fdf2f8;
+}
+
+.event-poster-img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.event-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  text-align: center;
+}
+
+.event-date {
+  margin: 0;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2.2rem, 7vw, 3.4rem);
+  line-height: 1;
+  letter-spacing: 0.05em;
+  color: var(--primary);
+}
+
+.event-platform {
+  margin: 0;
+  font-size: 0.88rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
 }
 
 /* Find the Car Fault */
@@ -1554,6 +1661,11 @@ body {
 
   .nav-links.open {
     display: flex;
+  }
+
+  .lang-switch {
+    margin-left: auto;
+    margin-right: 4px;
   }
 
   .about-grid,

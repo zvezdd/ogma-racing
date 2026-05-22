@@ -1,3 +1,5 @@
+import { onLangChange, t } from './i18n.ts'
+
 export type FindFaultOptions = {
   mount: HTMLElement
 }
@@ -8,16 +10,16 @@ type HitZone = {
   top: number
   width: number
   height: number
-  label: string
+  labelKey: string
 }
 
 type LevelDef = {
   id: string
-  title: string
+  titleKey: string
   faults: number
-  instruction: string
+  instructionKey: string
+  imageAltKey: string
   image: string
-  imageAlt: string
   zones: HitZone[]
 }
 
@@ -26,74 +28,46 @@ const IMG = '/images/find-fault'
 const LEVELS: LevelDef[] = [
   {
     id: 'missing-wheel',
-    title: 'Level 1 · Pit lane',
+    titleKey: 'fault.l1.title',
     faults: 1,
-    instruction: 'One wheel is missing. Tap where the fault is.',
+    instructionKey: 'fault.l1.hint',
+    imageAltKey: 'fault.l1.zone',
     image: `${IMG}/level-01-missing-wheel.png`,
-    imageAlt: 'F1 car in a garage with a missing front wheel',
     zones: [
-      {
-        id: 'missing-wheel',
-        left: 40,
-        top: 56,
-        width: 14,
-        height: 18,
-        label: 'Missing front wheel',
-      },
+      { id: 'missing-wheel', left: 40, top: 56, width: 14, height: 18, labelKey: 'fault.l1.zone' },
     ],
   },
   {
     id: 'wrong-livery',
-    title: 'Level 2 · Paint check',
+    titleKey: 'fault.l2.title',
     faults: 1,
-    instruction: 'The car has the wrong team colours. Find the mistake.',
+    instructionKey: 'fault.l2.hint',
+    imageAltKey: 'fault.l2.zone',
     image: `${IMG}/level-02-wrong-livery.png`,
-    imageAlt: 'F1 car with incorrect red, white and blue body colours',
     zones: [
-      {
-        id: 'wrong-livery',
-        left: 44,
-        top: 46,
-        width: 18,
-        height: 16,
-        label: 'Wrong body colour',
-      },
+      { id: 'wrong-livery', left: 44, top: 46, width: 18, height: 16, labelKey: 'fault.l2.zone' },
     ],
   },
   {
     id: 'extra-tool',
-    title: 'Level 3 · Garage floor',
+    titleKey: 'fault.l3.title',
     faults: 1,
-    instruction: 'Something does not belong in the pit lane. Tap it.',
+    instructionKey: 'fault.l3.hint',
+    imageAltKey: 'fault.l3.zone',
     image: `${IMG}/level-03-extra-tool.png`,
-    imageAlt: 'F1 car in a garage with a wrench on the floor',
     zones: [
-      {
-        id: 'extra-tool',
-        left: 62,
-        top: 68,
-        width: 26,
-        height: 16,
-        label: 'Extra tool on the floor',
-      },
+      { id: 'extra-tool', left: 62, top: 68, width: 26, height: 16, labelKey: 'fault.l3.zone' },
     ],
   },
   {
     id: 'rear-wing',
-    title: 'Level 4 · Aero inspection',
+    titleKey: 'fault.l4.title',
     faults: 1,
-    instruction: 'Find the damaged part on the car.',
+    instructionKey: 'fault.l4.hint',
+    imageAltKey: 'fault.l4.zone',
     image: `${IMG}/level-04-rear-wing.png`,
-    imageAlt: 'F1 car in a garage with a damaged rear wing endplate',
     zones: [
-      {
-        id: 'rear-wing',
-        left: 74,
-        top: 34,
-        width: 12,
-        height: 14,
-        label: 'Damaged rear wing',
-      },
+      { id: 'rear-wing', left: 74, top: 34, width: 12, height: 14, labelKey: 'fault.l4.zone' },
     ],
   },
 ]
@@ -106,7 +80,7 @@ function sceneMarkup(level: LevelDef): string {
     class="fault-zone"
     data-id="${zone.id}"
     style="left:${zone.left}%;top:${zone.top}%;width:${zone.width}%;height:${zone.height}%"
-    aria-label="Inspect: ${zone.label}"
+    aria-label="Inspect: ${t(zone.labelKey)}"
   ></button>`,
     )
     .join('')
@@ -114,7 +88,7 @@ function sceneMarkup(level: LevelDef): string {
   return `<img
     class="fault-art"
     src="${level.image}"
-    alt="${level.imageAlt}"
+    alt="${t(level.instructionKey)}"
     draggable="false"
     decoding="async"
   />${zones}`
@@ -146,12 +120,11 @@ export function initFindFault({ mount }: FindFaultOptions): () => void {
   const prevBtn = document.createElement('button')
   prevBtn.type = 'button'
   prevBtn.className = 'fault-btn'
-  prevBtn.textContent = 'Previous'
+  prevBtn.dataset.i18n = 'fault.prev'
 
   const nextBtn = document.createElement('button')
   nextBtn.type = 'button'
   nextBtn.className = 'fault-btn fault-btn-primary'
-  nextBtn.textContent = 'Next level'
 
   const sceneWrap = document.createElement('div')
   sceneWrap.className = 'fault-scene-wrap'
@@ -170,11 +143,12 @@ export function initFindFault({ mount }: FindFaultOptions): () => void {
 
   const updateProgress = () => {
     const current = level()
-    progressEl.textContent = `Found ${found.size} of ${current.faults}`
+    progressEl.textContent = t('fault.found', { n: found.size, total: current.faults })
     prevBtn.disabled = levelIndex === 0
     nextBtn.textContent =
-      levelIndex >= LEVELS.length - 1 ? 'Play again' : 'Next level'
+      levelIndex >= LEVELS.length - 1 ? t('fault.replay') : t('fault.next')
     nextBtn.disabled = found.size < current.faults
+    prevBtn.textContent = t('fault.prev')
   }
 
   const setStatus = (message: string) => {
@@ -190,13 +164,11 @@ export function initFindFault({ mount }: FindFaultOptions): () => void {
 
     found.add(id)
     btn.classList.add('is-found')
-    setStatus(`Correct — ${zone.label}.`)
+    setStatus(t('fault.correct', { label: t(zone.labelKey) }))
 
     if (found.size >= level().faults) {
       setStatus(
-        levelIndex >= LEVELS.length - 1
-          ? 'Inspection complete. You found every fault.'
-          : 'Bay clear. Continue to the next level when ready.',
+        levelIndex >= LEVELS.length - 1 ? t('fault.done') : t('fault.nextReady'),
       )
     }
 
@@ -206,9 +178,9 @@ export function initFindFault({ mount }: FindFaultOptions): () => void {
   const renderLevel = () => {
     found.clear()
     const current = level()
-    levelTitle.textContent = current.title
-    setStatus(current.instruction)
-    scene.setAttribute('aria-label', current.instruction)
+    levelTitle.textContent = t(current.titleKey)
+    setStatus(t(current.instructionKey))
+    scene.setAttribute('aria-label', t(current.instructionKey))
     scene.innerHTML = sceneMarkup(current)
 
     scene.querySelectorAll<HTMLButtonElement>('.fault-zone').forEach((btn) => {
@@ -224,7 +196,7 @@ export function initFindFault({ mount }: FindFaultOptions): () => void {
   const onSceneMiss = (event: MouseEvent) => {
     if ((event.target as HTMLElement).closest('.fault-zone')) return
     if (found.size >= level().faults) return
-    setStatus('Not that spot — keep inspecting the car and garage.')
+    setStatus(t('fault.miss'))
   }
 
   const goNext = () => {
@@ -244,8 +216,10 @@ export function initFindFault({ mount }: FindFaultOptions): () => void {
   prevBtn.addEventListener('click', goPrev)
 
   renderLevel()
+  const stopLang = onLangChange(renderLevel)
 
   return () => {
+    stopLang()
     scene.removeEventListener('click', onSceneMiss)
     nextBtn.removeEventListener('click', goNext)
     prevBtn.removeEventListener('click', goPrev)

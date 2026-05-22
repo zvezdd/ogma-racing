@@ -1,4 +1,5 @@
 import * as THREE from 'three'
+import { onLangChange, t } from './i18n.ts'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { STLLoader } from 'three/examples/jsm/loaders/STLLoader.js'
 
@@ -63,6 +64,14 @@ export function initCarViewer(options: CarViewerOptions): () => void {
 
   let mesh: THREE.Mesh | null = null
   let animationId = 0
+  let modelReady = false
+
+  const setStatusText = (key: 'car.viewer.loading' | 'car.viewer.ready' | 'car.viewer.error', isError = false) => {
+    if (!statusEl) return
+    statusEl.textContent = t(key)
+    statusEl.classList.toggle('is-ready', key === 'car.viewer.ready')
+    statusEl.classList.toggle('is-error', isError)
+  }
 
   const animate = () => {
     animationId = requestAnimationFrame(animate)
@@ -134,19 +143,25 @@ export function initCarViewer(options: CarViewerOptions): () => void {
       initialCameraPosition.copy(camera.position)
       initialTarget.copy(controls.target)
 
-      if (statusEl) {
-        statusEl.textContent = 'Drag to orbit · Scroll to zoom · Right-drag to pan'
-        statusEl.classList.add('is-ready')
-      }
+      modelReady = true
+      setStatusText('car.viewer.ready')
     },
     undefined,
     () => {
-      if (statusEl) {
-        statusEl.textContent = 'Could not load the 3D model. Check that the file is in /public/models/.'
-        statusEl.classList.add('is-error')
-      }
+      setStatusText('car.viewer.error', true)
     },
   )
+
+  const stopLang = onLangChange(() => {
+    if (!statusEl) return
+    if (statusEl.classList.contains('is-error')) {
+      setStatusText('car.viewer.error', true)
+    } else if (modelReady) {
+      setStatusText('car.viewer.ready')
+    } else {
+      setStatusText('car.viewer.loading')
+    }
+  })
 
   const resize = () => {
     const w = Math.max(1, mount.clientWidth)
@@ -160,6 +175,7 @@ export function initCarViewer(options: CarViewerOptions): () => void {
   ro.observe(mount)
 
   return () => {
+    stopLang()
     cancelAnimationFrame(animationId)
     ro.disconnect()
     autoRotateButton?.removeEventListener('click', onAutoClick)

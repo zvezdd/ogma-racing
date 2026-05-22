@@ -1,3 +1,5 @@
+import { onLangChange, t } from './i18n.ts'
+
 export type PitTimerOptions = {
   mount: HTMLElement
 }
@@ -23,16 +25,16 @@ export function initPitTimer({ mount }: PitTimerOptions): () => void {
   shell.innerHTML = `
     <div class="pit-timer-panel">
       <div class="pit-timer-chrome">
-        <span class="pit-timer-badge">OGMA PIT</span>
+        <span class="pit-timer-badge" data-i18n="timer.badge">OGMA PIT</span>
         <span class="pit-timer-live" id="pitTimerLive" hidden aria-hidden="true">LIVE</span>
       </div>
-      <p class="pit-timer-label">Session time</p>
+      <p class="pit-timer-label" data-i18n="timer.session">Session time</p>
       <div class="pit-timer-display" id="pitTimerDisplay" aria-live="polite">00:00.00</div>
       <div class="pit-timer-bar" aria-hidden="true"><span id="pitTimerBar"></span></div>
     </div>
     <div class="pit-timer-actions">
-      <button type="button" class="pit-timer-btn pit-timer-btn-start" id="pitTimerStart">Start</button>
-      <button type="button" class="pit-timer-btn pit-timer-btn-reset" id="pitTimerReset">Reset</button>
+      <button type="button" class="pit-timer-btn pit-timer-btn-start" id="pitTimerStart" data-i18n="timer.start">Start</button>
+      <button type="button" class="pit-timer-btn pit-timer-btn-reset" id="pitTimerReset" data-i18n="timer.reset">Reset</button>
     </div>
   `
 
@@ -62,7 +64,7 @@ export function initPitTimer({ mount }: PitTimerOptions): () => void {
     running = next
     panel.classList.toggle('is-running', running)
     live.hidden = !running
-    startBtn.textContent = running ? 'Pause' : 'Start'
+    startBtn.textContent = running ? t('timer.pause') : t('timer.start')
     startBtn.setAttribute('aria-pressed', String(running))
 
     if (running) {
@@ -83,11 +85,22 @@ export function initPitTimer({ mount }: PitTimerOptions): () => void {
     render()
   }
 
+  const refreshLabels = () => {
+    shell.querySelectorAll<HTMLElement>('[data-i18n]').forEach((el) => {
+      const key = el.dataset.i18n
+      if (key) el.textContent = t(key)
+    })
+    startBtn.textContent = running ? t('timer.pause') : t('timer.start')
+  }
+
   startBtn.addEventListener('click', onStart)
   resetBtn.addEventListener('click', onReset)
   render()
+  refreshLabels()
+  const stopLang = onLangChange(refreshLabels)
 
   return () => {
+    stopLang()
     cancelAnimationFrame(rafId)
     startBtn.removeEventListener('click', onStart)
     resetBtn.removeEventListener('click', onReset)

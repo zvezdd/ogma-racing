@@ -1,3 +1,5 @@
+import { onLangChange, t } from './i18n.ts'
+
 export type PitStopMemoryOptions = {
   mount: HTMLElement
 }
@@ -6,20 +8,26 @@ type CardKind = 'tire-slick' | 'tire-wet' | 'wrench' | 'jack' | 'piston' | 'spar
 
 type CardDef = {
   kind: CardKind
-  label: string
+  labelKey: string
   category: 'tires' | 'tools' | 'engine'
 }
 
 type DeckCard = CardDef & { pairIndex: number; uid: number }
 
 const CARD_DEFS: CardDef[] = [
-  { kind: 'tire-slick', label: 'Slick tyre', category: 'tires' },
-  { kind: 'tire-wet', label: 'Wet tyre', category: 'tires' },
-  { kind: 'wrench', label: 'Wheel gun', category: 'tools' },
-  { kind: 'jack', label: 'Pit jack', category: 'tools' },
-  { kind: 'piston', label: 'Piston', category: 'engine' },
-  { kind: 'spark-plug', label: 'Spark plug', category: 'engine' },
+  { kind: 'tire-slick', labelKey: 'memory.card.slick', category: 'tires' },
+  { kind: 'tire-wet', labelKey: 'memory.card.wet', category: 'tires' },
+  { kind: 'wrench', labelKey: 'memory.card.gun', category: 'tools' },
+  { kind: 'jack', labelKey: 'memory.card.jack', category: 'tools' },
+  { kind: 'piston', labelKey: 'memory.card.piston', category: 'engine' },
+  { kind: 'spark-plug', labelKey: 'memory.card.spark', category: 'engine' },
 ]
+
+const categoryKey = (category: CardDef['category']) => {
+  if (category === 'tires') return 'memory.cat.tires'
+  if (category === 'tools') return 'memory.cat.tools'
+  return 'memory.cat.engine'
+}
 
 const ICONS: Record<CardKind, string> = {
   'tire-slick': `<svg viewBox="0 0 64 64" fill="none" aria-hidden="true">
@@ -53,12 +61,6 @@ const ICONS: Record<CardKind, string> = {
   </svg>`,
 }
 
-const CATEGORY_LABEL: Record<CardDef['category'], string> = {
-  tires: 'Tyres',
-  tools: 'Tools',
-  engine: 'Engine',
-}
-
 function shuffle<T>(items: T[]): T[] {
   const copy = [...items]
   for (let i = copy.length - 1; i > 0; i -= 1) {
@@ -78,7 +80,8 @@ function buildDeck(): DeckCard[] {
 }
 
 function cardMarkup(card: DeckCard, index: number): string {
-  const category = CATEGORY_LABEL[card.category]
+  const category = t(categoryKey(card.category))
+  const label = t(card.labelKey)
   return `
     <button
       type="button"
@@ -93,7 +96,7 @@ function cardMarkup(card: DeckCard, index: number): string {
         </span>
         <span class="memory-card-face memory-card-front" data-category="${card.category}">
           <span class="memory-card-icon">${ICONS[card.kind]}</span>
-          <span class="memory-card-label">${card.label}</span>
+          <span class="memory-card-label">${label}</span>
           <span class="memory-card-tag">${category}</span>
         </span>
       </span>
@@ -119,13 +122,13 @@ export function initPitStopMemory({ mount }: PitStopMemoryOptions): () => void {
   statusEl.className = 'memory-status'
   statusEl.id = 'memoryStatus'
   statusEl.setAttribute('aria-live', 'polite')
-  statusEl.textContent = 'Find matching pairs in the pit lane.'
+  statusEl.dataset.i18n = 'memory.status'
 
   const restartBtn = document.createElement('button')
   restartBtn.type = 'button'
   restartBtn.className = 'memory-restart'
   restartBtn.id = 'memoryRestart'
-  restartBtn.textContent = 'New grid'
+  restartBtn.dataset.i18n = 'memory.restart'
 
   const board = document.createElement('div')
   board.className = 'memory-board'
@@ -150,7 +153,13 @@ export function initPitStopMemory({ mount }: PitStopMemoryOptions): () => void {
     locked = false
     matchedCount = 0
     renderBoard()
-    setStatus('Find matching pairs in the pit lane.')
+    setStatus(t('memory.status'))
+  }
+
+  const refreshUi = () => {
+    statusEl.textContent = t('memory.status')
+    restartBtn.textContent = t('memory.restart')
+    renderBoard()
   }
 
   const onBoardClick = (event: Event) => {
@@ -184,15 +193,15 @@ export function initPitStopMemory({ mount }: PitStopMemoryOptions): () => void {
         first.classList.add('is-matched')
         second.classList.add('is-matched')
         matchedCount += 1
-        setStatus(`${matchedCount} of ${totalPairs} pairs secured.`)
+        setStatus(t('memory.match', { n: matchedCount, total: totalPairs }))
 
         if (matchedCount >= totalPairs) {
-          setStatus('Pit stop complete — every pair matched.')
+          setStatus(t('memory.complete'))
         }
       } else if (first && second) {
         first.classList.remove('is-flipped')
         second.classList.remove('is-flipped')
-        setStatus('No match — try another pair.')
+        setStatus(t('memory.noMatch'))
       }
 
       flipped = []
@@ -200,11 +209,13 @@ export function initPitStopMemory({ mount }: PitStopMemoryOptions): () => void {
     }, 700)
   }
 
-  renderBoard()
+  refreshUi()
   board.addEventListener('click', onBoardClick)
   restartBtn.addEventListener('click', resetGame)
+  const stopLang = onLangChange(refreshUi)
 
   return () => {
+    stopLang()
     board.removeEventListener('click', onBoardClick)
     restartBtn.removeEventListener('click', resetGame)
     mount.replaceChildren()
