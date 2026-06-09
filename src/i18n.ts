@@ -9,7 +9,8 @@ let currentLang: Lang = 'en'
 const messages: Record<Lang, Record<string, string>> = {
   en: {
     'nav.toggle': 'Toggle navigation',
-    'nav.event': 'Event',
+    'nav.journey': 'Journey',
+    'nav.past': 'Past Events',
     'nav.about': 'About',
     'nav.team': 'Team',
     'nav.car': 'Car',
@@ -30,12 +31,31 @@ const messages: Record<Lang, Record<string, string>> = {
     'hero.viewCar': 'View Our Car',
     'hero.scroll': 'Scroll down',
 
-    'event.label': 'ONLINE MEETING',
+    'journey.label': 'OUR JOURNEY',
+    'journey.title': 'National Champions 2026',
+    'journey.intro':
+      'From the workshop to the national podium — here is where Ogma stands today.',
+    'journey.altTeam': 'The Ogma team together',
+    'journey.altChamp': 'Ogma team celebrating the national championship',
+    'journey.altNext': 'Ogma team ahead of the international stage',
+    'journey.champ.tag': 'CHAMPIONS',
+    'journey.champ.title': 'National STEM Racing 2026 — Kazakhstan',
+    'journey.champ.body':
+      'We won the national STEM Racing 2026 Kazakhstan championship — the result of a full season of design, building, testing, and teamwork.',
+    'journey.next.tag': 'NEXT STAGE',
+    'journey.next.title': 'International Final · Singapore',
+    'journey.next.body':
+      'As national champions, Ogma earned a place at the international STEM Racing final in Singapore, competing against the best school teams in the world.',
+    'journey.next.dates': '2–8 October 2026 · Singapore',
+
+    'past.label': 'PAST EVENTS',
+    'past.title': "What We've Hosted",
+    'past.completed': 'Completed',
+
     'event.title': 'Meet Alexandr Artemyev',
     'event.subtitle': 'Le Mans 24 Hours driver · live with Ogma',
     'event.date': '25 May · 20:00',
     'event.platform': 'Google Meet',
-    'event.cta': 'Join us',
     'event.altPoster': 'Ogma online meeting poster with Alexandr Artemyev',
 
     'about.label': 'WHO WE ARE',
@@ -160,7 +180,8 @@ const messages: Record<Lang, Record<string, string>> = {
   },
   ru: {
     'nav.toggle': 'Открыть меню',
-    'nav.event': 'Встреча',
+    'nav.journey': 'Наш путь',
+    'nav.past': 'Прошедшие',
     'nav.about': 'О нас',
     'nav.team': 'Команда',
     'nav.car': 'Болид',
@@ -181,12 +202,31 @@ const messages: Record<Lang, Record<string, string>> = {
     'hero.viewCar': 'Посмотреть болид',
     'hero.scroll': 'Прокрутить вниз',
 
-    'event.label': 'ОНЛАЙН-ВСТРЕЧА',
+    'journey.label': 'НАШ ПУТЬ',
+    'journey.title': 'Чемпионы страны 2026',
+    'journey.intro':
+      'От мастерской до национального подиума — вот где Ogma находится сегодня.',
+    'journey.altTeam': 'Команда Ogma вместе',
+    'journey.altChamp': 'Команда Ogma на национальном чемпионате',
+    'journey.altNext': 'Команда Ogma перед международным этапом',
+    'journey.champ.tag': 'ЧЕМПИОНЫ',
+    'journey.champ.title': 'Национальный STEM Racing 2026 — Казахстан',
+    'journey.champ.body':
+      'Мы выиграли национальный чемпионат STEM Racing 2026 в Казахстане — результат целого сезона проектирования, сборки, тестов и командной работы.',
+    'journey.next.tag': 'СЛЕДУЮЩИЙ ЭТАП',
+    'journey.next.title': 'Международный финал · Сингапур',
+    'journey.next.body':
+      'Как чемпионы страны, Ogma отобрана на международный финал STEM Racing в Сингапуре, где соревнуются лучшие школьные команды мира.',
+    'journey.next.dates': '2–8 октября 2026 · Сингапур',
+
+    'past.label': 'ПРОШЕДШИЕ МЕРОПРИЯТИЯ',
+    'past.title': 'Что мы провели',
+    'past.completed': 'Завершено',
+
     'event.title': 'Александр Артемьев',
     'event.subtitle': 'Гонщик Le Mans 24 Hours · встреча с Ogma',
     'event.date': '25 мая · 20:00',
     'event.platform': 'Google Meet',
-    'event.cta': 'Присоединиться',
     'event.altPoster': 'Анонс онлайн-встречи Ogma с Александром Артемьевым',
 
     'about.label': 'КТО МЫ',

@@ -71,7 +71,7 @@ app.innerHTML = `
   <nav class="navbar" id="navbar">
     <div class="container nav-inner">
       <a href="#hero" class="brand">
-        <img class="brand-logo" src="/images/ogma-logo.png" alt="OGMA" />
+        <img class="brand-logo" src="/images/ogma-logo.png?v=2" alt="OGMA" />
       </a>
       <div class="lang-switch" role="group" data-i18n-aria="nav.lang">
         <button type="button" class="lang-switch-btn is-active" data-lang="en" aria-pressed="true" data-i18n="lang.en">EN</button>
@@ -81,7 +81,7 @@ app.innerHTML = `
         <span></span><span></span><span></span>
       </button>
       <div class="nav-links" id="navLinks">
-        <a href="#event" data-i18n="nav.event">Event</a>
+        <a href="#journey" data-i18n="nav.journey">Journey</a>
         <a href="#about" data-i18n="nav.about">About</a>
         <a href="#team" data-i18n="nav.team">Team</a>
         <a href="#car" data-i18n="nav.car">Car</a>
@@ -98,12 +98,8 @@ app.innerHTML = `
   <main>
     <section class="hero-section" id="hero">
       <div class="container hero-content">
-        <span class="section-badge reveal">
-          <span class="badge-dot"></span>
-          <span data-i18n="hero.badge">Kazakhstan Racing · STEM 2026</span>
-        </span>
         <h1 class="hero-title">
-          <span class="hero-white">OG</span><span class="hero-yellow">MA</span>
+          <img class="hero-logo" src="/images/ogma-wordmark.png?v=2" alt="OGMA" />
         </h1>
         <p class="hero-subtitle reveal">
           <span data-i18n="hero.subtitle">Engineering Tomorrow's Champions</span>
@@ -114,35 +110,77 @@ app.innerHTML = `
           <a href="#car" class="btn btn-ghost" data-i18n="hero.viewCar">View Our Car</a>
         </div>
       </div>
-      <a class="scroll-indicator" href="#event" data-i18n-aria="hero.scroll" aria-label="Scroll down">
+      <a class="scroll-indicator" href="#journey" data-i18n-aria="hero.scroll" aria-label="Scroll down">
         <span></span>
       </a>
     </section>
 
-    <section class="section event-section" id="event">
+    <section class="section journey-section" id="journey">
       <div class="container">
-        <span class="section-label reveal" data-i18n="event.label">ONLINE MEETING</span>
-        <h2 class="section-title reveal" data-i18n="event.title">Meet Alexandr Artemyev</h2>
-        <p class="event-intro reveal" data-i18n="event.subtitle">Le Mans 24 Hours driver · live with Ogma</p>
-        <div class="event-poster reveal">
+        <span class="section-label reveal" data-i18n="journey.label">OUR JOURNEY</span>
+        <h2 class="section-title reveal" data-i18n="journey.title">National Champions 2026</h2>
+        <p class="journey-intro reveal" data-i18n="journey.intro">
+          From the workshop to the national podium — here is where Ogma stands today.
+        </p>
+
+        <div class="journey-banner reveal">
           <img
-            class="event-poster-img"
-            src="/images/event/artemyev-poster.png"
-            data-i18n-alt="event.altPoster"
-            alt="Ogma online meeting poster"
+            src="/images/journey/team-bench.png"
+            data-i18n-alt="journey.altChamp"
+            alt="Ogma team"
           />
         </div>
-        <div class="event-meta reveal">
-          <p class="event-date" data-i18n="event.date">25 May · 20:00</p>
-          <p class="event-platform" data-i18n="event.platform">Google Meet</p>
-          <a
-            href="https://forms.gle/BaMo1rApvNb23b9v5"
-            class="btn btn-primary"
-            target="_blank"
-            rel="noopener noreferrer"
-            data-i18n="event.cta"
-          >Join us</a>
+
+        <div class="journey-feature reveal">
+          <div class="journey-feature-media">
+            <img src="/images/journey/team-banner.png" data-i18n-alt="journey.altTeam" alt="Ogma team" />
+          </div>
+          <div class="journey-feature-text">
+            <span class="journey-tag is-champ" data-i18n="journey.champ.tag">CHAMPIONS</span>
+            <h3 data-i18n="journey.champ.title">National STEM Racing 2026 — Kazakhstan</h3>
+            <p data-i18n="journey.champ.body">
+              We won the national STEM Racing 2026 Kazakhstan championship.
+            </p>
+          </div>
         </div>
+
+        <div class="journey-feature journey-feature-rev reveal">
+          <div class="journey-feature-media">
+            <img class="journey-img-up" src="/images/journey/team-lab.png" data-i18n-alt="journey.altNext" alt="Ogma team" />
+          </div>
+          <div class="journey-feature-text">
+            <span class="journey-tag is-next" data-i18n="journey.next.tag">NEXT STAGE</span>
+            <h3 data-i18n="journey.next.title">International Final · Singapore</h3>
+            <p data-i18n="journey.next.body">
+              As national champions, Ogma is selected for the international stage in Singapore.
+            </p>
+            <p class="journey-dates" data-i18n="journey.next.dates">2–8 October 2026 · Singapore</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-striped past-events" id="event">
+      <div class="container">
+        <span class="section-label reveal" data-i18n="past.label">PAST EVENTS</span>
+        <h2 class="section-title reveal" data-i18n="past.title">What We've Hosted</h2>
+        <article class="past-event-card reveal">
+          <div class="past-event-media">
+            <img
+              class="event-poster-img"
+              src="/images/event/artemyev-poster.png"
+              data-i18n-alt="event.altPoster"
+              alt="Ogma online meeting poster"
+            />
+          </div>
+          <div class="past-event-body">
+            <span class="past-event-status" data-i18n="past.completed">Completed</span>
+            <h3 data-i18n="event.title">Meet Alexandr Artemyev</h3>
+            <p class="event-intro" data-i18n="event.subtitle">Le Mans 24 Hours driver · live with Ogma</p>
+            <p class="event-date" data-i18n="event.date">25 May · 20:00</p>
+            <p class="event-platform" data-i18n="event.platform">Google Meet</p>
+          </div>
+        </article>
       </div>
     </section>
 
@@ -387,12 +425,13 @@ app.innerHTML = `
     <div class="container footer-inner">
       <div>
         <a href="#hero" class="brand footer-brand">
-          <img class="brand-logo" src="/images/ogma-logo.png" alt="OGMA" />
+          <img class="brand-logo" src="/images/ogma-logo.png?v=2" alt="OGMA" />
         </a>
         <p data-i18n="footer.tagline">Technical precision meets creative ambition.</p>
       </div>
       <div class="footer-links">
-        <a href="#event" data-i18n="nav.event">Event</a>
+        <a href="#journey" data-i18n="nav.journey">Journey</a>
+        <a href="#event" data-i18n="nav.past">Past Events</a>
         <a href="#about" data-i18n="nav.about">About</a>
         <a href="#team" data-i18n="nav.team">Team</a>
         <a href="#car" data-i18n="nav.car">Car</a>
