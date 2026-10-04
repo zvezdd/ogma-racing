@@ -1709,6 +1709,156 @@ a.social-card {
   pointer-events: none;
 }
 
+/* ---------- Pit zone page ---------- */
+
+.car-feature-meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.nav-links a.is-current {
+  color: var(--text);
+  position: relative;
+}
+
+.nav-links a.is-current::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -6px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--primary);
+}
+
+.pit-hero {
+  padding-top: calc(var(--section-space) + 60px);
+}
+
+.pit-intro {
+  max-width: 620px;
+  margin: 0 0 32px;
+  color: var(--text-muted);
+  font-size: 1rem;
+}
+
+.pit-viewer-card:hover {
+  transform: none;
+}
+
+.pit-viewer-body {
+  min-height: min(72vh, 760px);
+}
+
+.pit-viewer-mount {
+  min-height: 440px;
+  cursor: grab;
+}
+
+.pit-viewer-mount:active {
+  cursor: grabbing;
+}
+
+.pit-progress {
+  --progress: 0%;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 3px;
+  z-index: 2;
+  background: rgb(243 74 154 / 12%);
+  transition: opacity 300ms ease;
+}
+
+.pit-progress.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.pit-progress-bar {
+  display: block;
+  height: 100%;
+  width: var(--progress);
+  background: var(--primary);
+  box-shadow: 0 0 14px var(--primary-glow);
+  transition: width 200ms ease;
+}
+
+.pit-viewer-actions {
+  align-items: center;
+}
+
+.pit-view-group {
+  display: inline-flex;
+  gap: 4px;
+  padding: 3px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: rgb(12 6 10 / 72%);
+}
+
+.pit-view-group .car-viewer-btn {
+  border-color: transparent;
+  background: transparent;
+  padding: 6px 12px;
+}
+
+.pit-view-group .car-viewer-btn.is-active {
+  background: rgb(243 74 154 / 24%);
+  border-color: var(--border-accent);
+}
+
+.pit-meta-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.pit-stat h3 small {
+  font-size: 0.4em;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--text-dim);
+  margin-left: 2px;
+}
+
+.pit-parts {
+  margin-top: 56px;
+}
+
+.pit-parts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.pit-part-card {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.pit-part-swatch {
+  flex: 0 0 auto;
+  width: 14px;
+  height: 14px;
+  margin-top: 6px;
+  border-radius: 50%;
+  background: var(--swatch);
+  box-shadow: 0 0 0 3px rgb(255 255 255 / 6%), 0 0 12px color-mix(in srgb, var(--swatch) 55%, transparent);
+}
+
+.pit-part-card p {
+  font-size: 0.9rem;
+}
+
 .reveal {
   opacity: 0;
   transform: translateY(20px);
@@ -1851,6 +2001,18 @@ a.social-card {
 
   .sponsor-row {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .pit-meta-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .pit-viewer-body {
+    min-height: min(60vh, 560px);
+  }
+
+  .pit-viewer-mount {
+    min-height: 340px;
   }
 
   .footer-links {

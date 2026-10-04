@@ -88,6 +88,7 @@ app.innerHTML = `
         <a href="#pit-memory" data-i18n="nav.pitMemory">Pit Memory</a>
         <a href="#find-fault" data-i18n="nav.findFault">Find Fault</a>
         <a href="#pit-timer" data-i18n="nav.pitTimer">Pit Timer</a>
+        <a href="/pit-zone.html" data-i18n="nav.pitZone">Pit Zone</a>
         <a href="#gallery" data-i18n="nav.gallery">Gallery</a>
         <a href="#socials" data-i18n="nav.socials">Socials</a>
         <a href="#socials" class="btn btn-primary btn-sm" data-i18n="nav.join">Join Our Journey</a>
@@ -231,9 +232,12 @@ app.innerHTML = `
                 </div>
               </div>
             </div>
-            <div class="car-feature-meta">
-              <p data-i18n="car.meta.cad">Interactive CAD</p>
-              <h3 data-i18n="car.meta.title">OGM-01 · STL viewer</h3>
+            <div class="car-feature-meta car-feature-meta-row">
+              <div>
+                <p data-i18n="car.meta.cad">Interactive CAD</p>
+                <h3 data-i18n="car.meta.title">OGM-01 · STL viewer</h3>
+              </div>
+              <a href="/pit-zone.html" class="btn btn-ghost btn-sm" data-i18n="car.meta.pitZone">Explore the pit zone in 3D →</a>
             </div>
           </article>
           <div class="car-details">
@@ -438,6 +442,7 @@ app.innerHTML = `
         <a href="#pit-memory" data-i18n="nav.pitMemory">Pit Memory</a>
         <a href="#find-fault" data-i18n="nav.findFault">Find Fault</a>
         <a href="#pit-timer" data-i18n="nav.pitTimer">Pit Timer</a>
+        <a href="/pit-zone.html" data-i18n="nav.pitZone">Pit Zone</a>
         <a href="#gallery" data-i18n="nav.gallery">Gallery</a>
       </div>
       <p class="footer-copy" data-i18n="footer.copy">Ogma Racing Team © 2026 · Built with passion</p>
